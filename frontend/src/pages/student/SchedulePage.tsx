@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Calendar } from '../../components/schedule/Calendar'
 import { Button } from '../../components/ui/Button'
+import { Heading, Text } from '../../components/ui/Typography'
 import { scheduleEvents } from '../../data/mockData'
 import { X, CalendarDays, Clock } from 'lucide-react'
 import { Badge } from '../../components/ui/Badge'
 import type { ScheduleEvent } from '../../types'
+import { PageContainer } from '../../components/ui/PageContainer'
 
 const badgeVariantMap = {
   orange: 'orange' as const,
@@ -19,15 +21,15 @@ function EventModal({ event, onClose }: { event: ScheduleEvent; onClose: () => v
       <div className="w-full max-w-lg rounded-xl bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
         <div className="mb-4 flex items-start justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-slate-900">{event.title}</h3>
-            <p className="mt-1 text-sm text-slate-500">
+            <Text size="base" color="primary" className="text-lg font-semibold">{event.title}</Text>
+            <p className="mt-1 text-sm text-muted">
               <CalendarDays className="mr-1 inline h-4 w-4" />
               {event.date}
               <Clock className="ml-3 mr-1 inline h-4 w-4" />
               {event.time}
             </p>
           </div>
-          <button type="button" onClick={onClose} className="rounded p-1 text-slate-400 hover:bg-slate-100">
+          <button type="button" onClick={onClose} className="rounded p-1 text-muted hover:bg-border-light">
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -38,7 +40,7 @@ function EventModal({ event, onClose }: { event: ScheduleEvent; onClose: () => v
 
         {event.description && (
           <div className="mb-4">
-            <p className="text-sm text-slate-600">{event.description}</p>
+            <Text color="muted">{event.description}</Text>
           </div>
         )}
 
@@ -54,13 +56,13 @@ export function SchedulePage() {
   const [selectedEvent, setSelectedEvent] = useState<ScheduleEvent | null>(null)
 
   return (
-    <div>
-      <h1 className="mb-6 text-2xl font-bold text-slate-900 sm:text-3xl">Расписание</h1>
+    <PageContainer>
+      <Heading as="h1" className="mb-6">Расписание</Heading>
       <Calendar events={scheduleEvents} onEventClick={(event) => setSelectedEvent(event)} />
 
       {selectedEvent && (
         <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
       )}
-    </div>
+    </PageContainer>
   )
 }

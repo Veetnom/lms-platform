@@ -1,8 +1,8 @@
-import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Eye, ArrowLeft } from 'lucide-react'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { Card } from '../../components/ui/Card'
+import { Heading } from '../../components/ui/Typography'
 import { courseModules } from '../../data/mockCoursesData'
 import { moduleLessons } from '../../data/mockData'
 
@@ -17,7 +17,7 @@ export function CourseStructurePage() {
 
     return (
       <div>
-        <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+        <Heading as="h1" className="mb-4">Название курса</Heading>
         <div className="mb-6">
           <CourseTabs courseId={id} role="teacher" />
         </div>
@@ -67,7 +67,7 @@ export function CourseStructurePage() {
 
         {/* Список уроков */}
         <Card>
-          <h3 className="mb-4 text-lg font-semibold text-slate-900">Уроки модуля</h3>
+          <Heading as="h3" className="mb-4">Уроки модуля</Heading>
           <div className="rounded-lg border border-slate-200">
             {moduleLessons.map((lesson, idx) => (
               <div
@@ -99,13 +99,13 @@ export function CourseStructurePage() {
   // Список модулей
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+      <Heading as="h1" className="mb-4">Название курса</Heading>
       <div className="mb-6">
         <CourseTabs courseId={id} role="teacher" />
       </div>
 
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-slate-900">Модули курса</h2>
+        <Heading as="h2">Модули курса</Heading>
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">

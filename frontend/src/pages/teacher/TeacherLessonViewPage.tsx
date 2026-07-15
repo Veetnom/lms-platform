@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen, CheckSquare } from 'lucide-react'
 
 // ─── Types (копия из MethodistLessonEditorPage) ─────────────────────────────
@@ -149,7 +149,6 @@ function AnswerOptionView({ option, answerType }: { option: AnswerOption; answer
 // ─── Основная страница ────────────────────────────────────────────────────────
 
 export function TeacherLessonViewPage() {
-  const { lessonId } = useParams()
   const navigate = useNavigate()
 
   // В реальном приложении lessonId брался бы из useParams и подгружался с бэка

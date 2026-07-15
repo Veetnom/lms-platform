@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { Card } from '../../components/ui/Card'
+import { Heading } from '../../components/ui/Typography'
+import { PageContainer } from '../../components/ui/PageContainer'
 
 const mockStudents = [
   { id: '1', name: 'Александр', progress: 70, points: 490 },
@@ -18,14 +20,14 @@ export function CuratorCourseStatisticsPage() {
   const { id = '1' } = useParams()
 
   return (
-    <div>
-      <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+    <PageContainer>
+      <Heading as="h1" className="mb-4">Название курса</Heading>
       <div className="mb-6">
         <CourseTabs courseId={id} role="curator" />
       </div>
 
       {/* Ученики */}
-      <h2 className="mb-3 text-lg font-semibold text-slate-900">Ученики</h2>
+      <Heading as="h2" className="mb-3">Ученики</Heading>
       <div className="overflow-hidden rounded-lg border border-slate-200">
         <table className="w-full text-left text-sm">
           <thead className="bg-slate-50 text-slate-500">
@@ -58,7 +60,7 @@ export function CuratorCourseStatisticsPage() {
       </div>
 
       {/* Преподаватели */}
-      <h2 className="mb-3 mt-8 text-lg font-semibold text-slate-900">Преподаватели</h2>
+      <Heading as="h2" className="mb-3 mt-8">Преподаватели</Heading>
       <div className="space-y-3">
         {mockTeachers.map((t) => (
           <Card key={t.id}>
@@ -77,6 +79,6 @@ export function CuratorCourseStatisticsPage() {
           </Card>
         ))}
       </div>
-    </div>
+    </PageContainer>
   )
 }

@@ -2,6 +2,11 @@
   "dependencies": {
     "@tiptap/extension-placeholder": "^3.26.0",
     "@tiptap/react": "^3.26.0",
-    "@tiptap/starter-kit": "^3.26.0"
+    "@tiptap/starter-kit": "^3.26.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
   }
 }

@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { Card } from '../../components/ui/Card'
+import { Heading } from '../../components/ui/Typography'
+import { PageContainer } from '../../components/ui/PageContainer'
 import { courseModules } from '../../data/mockCoursesData'
 import { moduleLessons } from '../../data/mockData'
 
@@ -11,8 +13,8 @@ export function CuratorCourseStructurePage() {
   if (moduleId) {
     const module = courseModules.find((m) => m.id === moduleId)
     return (
-      <div>
-        <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+      <PageContainer>
+        <Heading as="h1" className="mb-4">Название курса</Heading>
         <div className="mb-6">
           <CourseTabs courseId={id} role="curator" />
         </div>
@@ -27,7 +29,7 @@ export function CuratorCourseStructurePage() {
         </div>
 
         <Card>
-          <h3 className="mb-4 text-lg font-semibold text-slate-900">{module?.title || 'Модуль'}</h3>
+          <Heading as="h3" className="mb-4">{module?.title || 'Модуль'}</Heading>
           <div className="rounded-lg border border-slate-200">
             {moduleLessons.map((lesson) => (
               <div
@@ -42,19 +44,19 @@ export function CuratorCourseStructurePage() {
             ))}
           </div>
         </Card>
-      </div>
+      </PageContainer>
     )
   }
 
   // Список модулей
   return (
-    <div>
-      <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+    <PageContainer>
+      <Heading as="h1" className="mb-4">Название курса</Heading>
       <div className="mb-6">
         <CourseTabs courseId={id} role="curator" />
       </div>
 
-      <h2 className="text-lg font-semibold text-slate-900">Модули курса</h2>
+      <Heading as="h2">Модули курса</Heading>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         {courseModules.map((mod) => (
@@ -78,6 +80,6 @@ export function CuratorCourseStructurePage() {
           </Link>
         ))}
       </div>
-    </div>
+    </PageContainer>
   )
 }

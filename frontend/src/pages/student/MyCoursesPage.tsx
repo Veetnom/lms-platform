@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { Card } from '../../components/ui/Card'
 import { ProgressBar } from '../../components/ui/ProgressBar'
+import { Heading, Text } from '../../components/ui/Typography'
 import { enrolledCourses } from '../../data/mockData'
+import { PageContainer } from '../../components/ui/PageContainer'
 
 export function MyCoursesPage() {
   return (
-    <div>
-      <h1 className="mb-6 text-2xl font-bold text-slate-900 sm:text-3xl">Мои курсы</h1>
+    <PageContainer>
+      <Heading as="h1" className="mb-6">Мои курсы</Heading>
       <div className="grid gap-5 lg:grid-cols-2">
         {enrolledCourses.map((course) => (
           <Link key={course.id} to={`/my-courses/${course.id}`}>
@@ -16,12 +18,10 @@ export function MyCoursesPage() {
                   {course.title.charAt(0)}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="text-lg font-semibold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                  <h3 className="text-lg font-semibold text-primary group-hover:text-emerald-600 transition-colors">
                     {course.title}
                   </h3>
-                  <p className="mt-1 text-sm text-slate-500">
-                    {course.progress}% материалов пройдено
-                  </p>
+                  <Text className="mt-1">{course.progress}% материалов пройдено</Text>
                   <ProgressBar value={course.progress} className="mt-2" />
                 </div>
               </div>
@@ -29,6 +29,6 @@ export function MyCoursesPage() {
           </Link>
         ))}
       </div>
-    </div>
+    </PageContainer>
   )
 }

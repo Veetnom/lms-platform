@@ -1,36 +1,26 @@
 import { Link } from 'react-router-dom'
 import { Card } from '../components/ui/Card'
+import { Button } from '../components/ui/Button'
+import { Heading, Text } from '../components/ui/Typography'
 
 export function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-bg p-4">
       <Card className="max-w-md text-center">
-        <h1 className="text-2xl font-bold text-slate-900">Онлайн-школа</h1>
-        <p className="mt-2 text-slate-600">Выберите раздел для просмотра</p>
+        <Heading as="h1">Онлайн-школа</Heading>
+        <Text className="mt-2">Выберите раздел для просмотра</Text>
         <div className="mt-6 flex flex-col gap-3">
-          <Link
-            to="/store"
-            className="rounded-lg bg-violet-600 px-4 py-3 font-medium text-white transition hover:bg-violet-700"
-          >
-            Ученик
+          <Link to="/store">
+            <Button variant="purple" fullWidth>Ученик</Button>
           </Link>
-          <Link
-            to="/teacher/courses"
-            className="rounded-lg bg-slate-900 px-4 py-3 font-medium text-white transition hover:bg-slate-800"
-          >
-            Преподаватель
+          <Link to="/teacher/courses">
+            <Button variant="dark" fullWidth>Преподаватель</Button>
           </Link>
-          <Link
-            to="/methodist/courses"
-            className="rounded-lg bg-blue-600 px-4 py-3 font-medium text-white transition hover:bg-blue-700"
-          >
-            Методист
+          <Link to="/methodist/courses">
+            <Button variant="blue" fullWidth>Методист</Button>
           </Link>
-          <Link
-            to="/curator/chat"
-            className="rounded-lg bg-green-700 px-4 py-3 font-medium text-white transition hover:bg-green-800"
-          >
-            Куратор
+          <Link to="/curator/chat">
+            <Button variant="green" fullWidth>Куратор</Button>
           </Link>
         </div>
       </Card>

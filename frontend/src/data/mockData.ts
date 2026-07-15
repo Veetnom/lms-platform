@@ -1,4 +1,5 @@
 import type {
+  AssignmentSubmission,
   CartItem,
   ChatThread,
   Course,
@@ -358,6 +359,18 @@ export const homeworkTabItems: HomeworkTabItem[] = [
   { value: 'submitted', label: 'Сданы' },
   { value: 'overdue', label: 'Просрочены' },
 ]
+
+export const assignmentSubmissions: Record<string, AssignmentSubmission[]> = {
+  '1': [
+    { studentId: '1', submittedAt: '12.04.2026', status: 'checked', points: 8, maxPoints: 10 },
+    { studentId: '2', submittedAt: '11.04.2026', status: 'pending' },
+    { studentId: '3', submittedAt: '10.04.2026', status: 'checked', points: 4, maxPoints: 5 },
+  ],
+  '2': [
+    { studentId: '1', submittedAt: '12.04.2026', status: 'pending' },
+    { studentId: '4', submittedAt: '11.04.2026', status: 'checked', points: 9, maxPoints: 10 },
+  ],
+}
 
 export function formatPrice(price: number): string {
   return price.toLocaleString('ru-RU') + ' ₽'

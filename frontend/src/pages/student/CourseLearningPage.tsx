@@ -4,6 +4,7 @@ import { BookOpen, Calendar, Target } from 'lucide-react'
 import { HomeworkCard } from '../../components/homework/HomeworkCard'
 import { Button } from '../../components/ui/Button'
 import { Card } from '../../components/ui/Card'
+import { Heading, Text } from '../../components/ui/Typography'
 import { ProgressBar } from '../../components/ui/ProgressBar'
 import {
   enrolledCourses,
@@ -13,6 +14,7 @@ import {
   studentModuleProgress,
 } from '../../data/mockData'
 import type { HomeworkTab } from '../../types'
+import { PageContainer } from '../../components/ui/PageContainer'
 
 export function CourseLearningPage() {
   const course = enrolledCourses[0]
@@ -20,21 +22,22 @@ export function CourseLearningPage() {
   const [expandedModuleId, setExpandedModuleId] = useState<string | null>(null)
 
   return (
-    <div className="space-y-8">
+    <PageContainer>
+      <div className="space-y-8">
       {/* Шапка курса */}
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">{course.title}</h1>
-        <p className="mt-2 text-sm text-slate-500">{course.progress}% материалов пройдено</p>
+        <Heading as="h1">{course.title}</Heading>
+        <Text className="mt-2">{course.progress}% материалов пройдено</Text>
         <ProgressBar value={course.progress} className="mt-2 max-w-md" />
-        <p className="mt-2 text-sm text-slate-500">
+        <Text className="mt-2">
           {course.pointsEarned}/{course.pointsTotal} баллов получено
-        </p>
+        </Text>
       </div>
 
       {course.currentTask && (
         <Card>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="font-medium text-slate-900">«{course.currentTask}»</p>
+            <Text size="base" color="primary" className="font-medium">«{course.currentTask}»</Text>
             <Link to="/my-courses/1/task/10">
               <Button variant="blue">Продолжить</Button>
             </Link>
@@ -44,7 +47,7 @@ export function CourseLearningPage() {
 
       {/* Домашние работы */}
       <section>
-        <h2 className="mb-4 text-xl font-semibold text-slate-900">Домашние работы</h2>
+        <Heading as="h2" className="mb-4">Домашние работы</Heading>
         <div className="mb-4 flex flex-wrap gap-2">
           {homeworkTabItems.map((tab) => (
             <button
@@ -77,7 +80,7 @@ export function CourseLearningPage() {
 
       {/* Модули курса */}
       <section>
-        <h2 className="mb-4 text-xl font-semibold text-slate-900">Программа курса</h2>
+        <Heading as="h2" className="mb-4">Программа курса</Heading>
         <div className="space-y-4">
           {studentModuleProgress.map((mod) => {
             const progressPct = mod.totalPoints > 0
@@ -90,7 +93,7 @@ export function CourseLearningPage() {
               <Card key={mod.id} className="overflow-hidden">
                 <button
                   onClick={() => setExpandedModuleId(isExpanded ? null : mod.id)}
-                  className="flex w-full items-start gap-4 px-6 py-5 text-left transition-colors hover:bg-slate-50"
+                  className="flex w-full items-start gap-4 px-6 py-5 text-left transition-colors hover:bg-border-light"
                 >
                   {/* Номер модуля */}
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 text-lg font-bold text-white shadow-sm">
@@ -100,7 +103,7 @@ export function CourseLearningPage() {
                   {/* Информация */}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="text-base font-semibold text-slate-900">{mod.title}</h3>
+                      <h3 className="text-base font-semibold text-primary">{mod.title}</h3>
                       {mod.completed && (
                         <span className="shrink-0 rounded bg-emerald-100 px-2 py-0.5 text-[10px] font-medium text-emerald-600">
                           Завершён
@@ -109,7 +112,7 @@ export function CourseLearningPage() {
                     </div>
 
                     {/* Статистика */}
-                    <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-slate-500">
+                    <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-muted">
                       <span className="inline-flex items-center gap-1">
                         <BookOpen className="h-3.5 w-3.5" />
                         {mod.lessonsCount} {mod.lessonsCount === 1 ? 'урок' : 'уроков'}
@@ -127,12 +130,12 @@ export function CourseLearningPage() {
                     {/* Прогресс */}
                     <div className="mt-3">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="font-medium text-slate-700">
+                        <span className="font-medium text-primary">
                           {mod.earnedPoints} / {mod.totalPoints} баллов
                         </span>
-                        <span className="text-slate-400">{progressPct}%</span>
+                        <span className="text-muted">{progressPct}%</span>
                       </div>
-                      <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
+                      <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-border-light">
                         <div
                           className="h-full rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 transition-all"
                           style={{ width: `${progressPct}%` }}
@@ -143,7 +146,7 @@ export function CourseLearningPage() {
 
                   {/* Стрелка */}
                   <div
-                    className={`mt-4 shrink-0 text-slate-400 transition-transform ${
+                    className={`mt-4 shrink-0 text-muted transition-transform ${
                       isExpanded ? 'rotate-180' : ''
                     }`}
                   >
@@ -155,18 +158,18 @@ export function CourseLearningPage() {
 
                 {/* Раскрывающийся список уроков */}
                 {isExpanded && lessons.length > 0 && (
-                  <div className="border-t border-slate-100 px-6 py-4">
+                  <div className="border-t border-border px-6 py-4">
                     <div className="space-y-2">
                       {lessons.map((lesson, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center justify-between rounded-lg bg-slate-50 px-4 py-3 transition-colors hover:bg-slate-100"
+                          className="flex items-center justify-between rounded-lg bg-bg-base px-4 py-3 transition-colors hover:bg-border-light"
                         >
                           <div className="min-w-0 flex-1">
-                            <p className="text-sm font-medium text-slate-900">{lesson.title}</p>
-                            <p className="text-xs text-slate-500">
+                            <Text className="font-medium">{lesson.title}</Text>
+                            <Text className="text-xs">
                               {lesson.points} · {lesson.status}
-                            </p>
+                            </Text>
                           </div>
                           {lesson.taskId && (
                             <Link to={lesson.isPassed ? `/my-courses/1/task/${lesson.taskId}` : '#'}>
@@ -186,5 +189,6 @@ export function CourseLearningPage() {
         </div>
       </section>
     </div>
+    </PageContainer>
   )
 }

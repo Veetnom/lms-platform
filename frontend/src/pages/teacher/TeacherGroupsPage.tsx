@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { teacherGroups } from '../../data/mockData'
 import { allStudents } from '../../data/mockCoursesData'
 import { Button } from '../../components/ui/Button'
+import { Heading } from '../../components/ui/Typography'
 import type { TeacherGroup } from '../../types'
 
 function EditGroupModal({
@@ -157,7 +158,7 @@ function GroupCard({ group }: { group: TeacherGroup }) {
 export function TeacherGroupsPage() {
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold text-slate-900 sm:text-3xl">Мои группы</h1>
+      <Heading as="h1" className="mb-6">Мои группы</Heading>
       <div className="space-y-3">
         {teacherGroups.map((group) => (
           <GroupCard key={group.id} group={group} />

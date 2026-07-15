@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { Button } from '../../components/ui/Button'
 import { Card } from '../../components/ui/Card'
+import { Heading } from '../../components/ui/Typography'
 import { Input } from '../../components/ui/Input'
 import { courseModules } from '../../data/mockCoursesData'
 import { moduleLessons } from '../../data/mockData'
@@ -15,7 +16,7 @@ export function MethodistCourseStructurePage() {
     const module = courseModules.find((m) => m.id === moduleId)
     return (
       <div>
-        <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+        <Heading as="h1" className="mb-4">Название курса</Heading>
         <div className="mb-6">
           <CourseTabs courseId={id} role="methodist" />
         </div>
@@ -37,7 +38,7 @@ export function MethodistCourseStructurePage() {
           </div>
 
           <div className="mt-6">
-            <h3 className="mb-3 text-sm font-medium text-slate-700">Структура модуля</h3>
+            <Heading as="h3" className="mb-3">Структура модуля</Heading>
             <div className="rounded-lg border border-slate-200">
               {moduleLessons.map((lesson) => (
                 <div
@@ -88,13 +89,13 @@ export function MethodistCourseStructurePage() {
   // Список модулей
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+      <Heading as="h1" className="mb-4">Название курса</Heading>
       <div className="mb-6">
         <CourseTabs courseId={id} role="methodist" />
       </div>
 
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-slate-900">Модули курса</h2>
+        <Heading as="h2">Модули курса</Heading>
         <Button variant="blue" size="sm">
           <Plus className="mr-2 h-4 w-4" />
           Добавить модуль

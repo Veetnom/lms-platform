@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 import { Card } from '../../components/ui/Card'
+import { Heading } from '../../components/ui/Typography'
+import { PageContainer } from '../../components/ui/PageContainer'
 import { methodistCourses } from '../../data/mockCoursesData'
 
 export function CuratorCourseListPage() {
   return (
-    <div>
-      <h1 className="mb-6 text-2xl font-bold text-slate-900 sm:text-3xl">Курсы</h1>
+    <PageContainer>
+      <Heading as="h1" className="mb-6">Курсы</Heading>
       <div className="grid gap-5 lg:grid-cols-2">
         {methodistCourses.filter((c) => c.status === 'published').map((course) => (
           <Link key={course.id} to={`/curator/courses/${course.id}`}>
@@ -27,6 +29,6 @@ export function CuratorCourseListPage() {
           </Link>
         ))}
       </div>
-    </div>
+    </PageContainer>
   )
 }

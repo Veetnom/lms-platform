@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { Button } from '../../components/ui/Button'
 import { Card } from '../../components/ui/Card'
+import { Heading } from '../../components/ui/Typography'
 import { Input } from '../../components/ui/Input'
 
 export function CourseInfoPage() {
@@ -9,7 +10,7 @@ export function CourseInfoPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+      <Heading as="h1" className="mb-4">Название курса</Heading>
       <div className="mb-6">
         <CourseTabs courseId={id} role="teacher" />
       </div>

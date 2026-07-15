@@ -161,3 +161,11 @@ export interface HomeworkTabItem {
   value: HomeworkTab
   label: string
 }
+
+export interface AssignmentSubmission {
+  studentId: string
+  submittedAt: string
+  status: 'checked' | 'pending'
+  points?: number
+  maxPoints?: number
+}

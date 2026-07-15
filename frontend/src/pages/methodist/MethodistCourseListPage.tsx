@@ -1,18 +1,15 @@
 import { Link } from 'react-router-dom'
 import { Card } from '../../components/ui/Card'
+import { Button } from '../../components/ui/Button'
+import { Heading } from '../../components/ui/Typography'
 import { methodistCourses } from '../../data/mockCoursesData'
 
 export function MethodistCourseListPage() {
   return (
     <div>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">Курсы</h1>
-        <button
-          type="button"
-          className="rounded-lg bg-black px-5 py-2.5 text-sm font-medium text-white transition hover:bg-gray-800"
-        >
-          Создать курс
-        </button>
+        <Heading as="h1">Курсы</Heading>
+        <Button>Создать курс</Button>
       </div>
 
       <div className="grid gap-5 lg:grid-cols-2">

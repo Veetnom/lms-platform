@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { Card } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
+import { Heading, Text } from '../../components/ui/Typography'
 import { UserCheck, GraduationCap } from 'lucide-react'
 
 const mockTeachers = [
@@ -19,17 +20,17 @@ export function MethodistCourseTeachersPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+      <Heading as="h1" className="mb-4">Название курса</Heading>
       <div className="mb-6">
         <CourseTabs courseId={id} role="methodist" />
       </div>
 
       {/* Команда курса */}
       <div className="mb-4">
-        <h2 className="text-lg font-semibold text-slate-900">Команда курса</h2>
-        <p className="mt-1 text-sm text-slate-500">
+        <Heading as="h2">Команда курса</Heading>
+        <Text className="mt-1">
           Преподаватели и ассистенты, работающие с курсом
-        </p>
+        </Text>
       </div>
 
       {/* Преподаватели (лекции и семинары) */}
@@ -37,7 +38,7 @@ export function MethodistCourseTeachersPage() {
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <GraduationCap className="h-5 w-5 text-blue-600" />
-            <h3 className="text-sm font-semibold text-slate-900">Преподаватели</h3>
+            <Text size="base" color="primary" className="text-sm font-semibold">Преподаватели</Text>
           </div>
           <Button variant="blue" size="sm">Добавить преподавателя</Button>
         </div>
@@ -49,8 +50,8 @@ export function MethodistCourseTeachersPage() {
                   {person.name.charAt(0)}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="font-medium text-slate-900">{person.name}</p>
-                  <p className="text-sm text-slate-500">{person.email}</p>
+                  <Text size="base" color="primary" className="font-medium">{person.name}</Text>
+                  <Text className="text-sm">{person.email}</Text>
                 </div>
                 {person.checkedAnswers && (
                   <span className="shrink-0 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600">
@@ -74,7 +75,7 @@ export function MethodistCourseTeachersPage() {
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <UserCheck className="h-5 w-5 text-violet-600" />
-            <h3 className="text-sm font-semibold text-slate-900">Кураторы</h3>
+            <Text size="base" color="primary" className="text-sm font-semibold">Кураторы</Text>
           </div>
           <Button variant="purple" size="sm">Добавить куратора</Button>
         </div>
@@ -86,8 +87,8 @@ export function MethodistCourseTeachersPage() {
                   {person.name.charAt(0)}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="font-medium text-slate-900">{person.name}</p>
-                  <p className="text-sm text-slate-500">{person.email}</p>
+                  <Text size="base" color="primary" className="font-medium">{person.name}</Text>
+                  <Text className="text-sm">{person.email}</Text>
                 </div>
                 <button
                   type="button"

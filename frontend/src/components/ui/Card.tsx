@@ -1,3 +1,4 @@
+import { cn } from '../../lib/cn'
 import type { ReactNode } from 'react'
 
 interface CardProps {
@@ -6,10 +7,14 @@ interface CardProps {
   padding?: boolean
 }
 
-export function Card({ children, className = '', padding = true }: CardProps) {
+export function Card({ children, className, padding = true }: CardProps) {
   return (
     <div
-      className={`rounded-xl border border-slate-200 bg-white shadow-sm ${padding ? 'p-4 sm:p-6' : ''} ${className}`}
+      className={cn(
+        'rounded-xl border border-slate-200 bg-white shadow-sm',
+        padding && 'p-4 sm:p-6',
+        className,
+      )}
     >
       {children}
     </div>

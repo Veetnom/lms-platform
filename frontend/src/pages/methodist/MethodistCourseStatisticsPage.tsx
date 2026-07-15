@@ -5,6 +5,7 @@ import { CuratorTable } from '../../components/teacher/CuratorTable'
 import { StudentTable } from '../../components/teacher/StudentTable'
 import { Button } from '../../components/ui/Button'
 import { Card } from '../../components/ui/Card'
+import { Heading } from '../../components/ui/Typography'
 import { SearchInput } from '../../components/ui/SearchInput'
 import { ToggleButtons } from '../../components/ui/ToggleButtons'
 import { curators, students } from '../../data/mockData'
@@ -15,7 +16,7 @@ export function MethodistCourseStatisticsPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+      <Heading as="h1" className="mb-4">Название курса</Heading>
       <div className="mb-6">
         <CourseTabs courseId={id} role="methodist" />
       </div>
@@ -31,9 +32,9 @@ export function MethodistCourseStatisticsPage() {
         />
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-lg font-semibold text-slate-900">
+          <Heading as="h2">
             {view === 'students' ? 'Ученики курса' : 'Преподаватели курса'}
-          </h2>
+          </Heading>
           <SearchInput className="w-full sm:max-w-xs" />
         </div>
 

@@ -3,6 +3,7 @@ import { CourseTabs } from '../../components/course/CourseTabs'
 import { HomeworkManageCard } from '../../components/teacher/HomeworkManageCard'
 import { Button } from '../../components/ui/Button'
 import { Card } from '../../components/ui/Card'
+import { Heading } from '../../components/ui/Typography'
 import { SearchInput } from '../../components/ui/SearchInput'
 import { Select } from '../../components/ui/Select'
 import { teacherHomework } from '../../data/mockData'
@@ -12,7 +13,7 @@ export function MethodistCourseHomeworkPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">Название курса</h1>
+      <Heading as="h1" className="mb-4">Название курса</Heading>
       <div className="mb-6">
         <CourseTabs courseId={id} role="methodist" />
       </div>
