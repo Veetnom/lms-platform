@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { CuratorTable } from '../../components/teacher/CuratorTable'
 import { StudentTable } from '../../components/teacher/StudentTable'
-import { Button } from '../../components/ui/Button'
 import { Card } from '../../components/ui/Card'
 import { Heading } from '../../components/ui/Typography'
 import { SearchInput } from '../../components/ui/SearchInput'
@@ -46,11 +45,6 @@ export function MethodistCourseStatisticsPage() {
           )}
         </div>
 
-        {view === 'teachers' && (
-          <div className="mt-6 flex justify-end">
-            <Button variant="primary">Добавить преподавателя</Button>
-          </div>
-        )}
       </Card>
     </div>
   )

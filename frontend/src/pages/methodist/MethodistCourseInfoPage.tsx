@@ -1,12 +1,41 @@
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { Button } from '../../components/ui/Button'
 import { Card } from '../../components/ui/Card'
-import { Heading } from '../../components/ui/Typography'
+import { Heading, Text } from '../../components/ui/Typography'
 import { Input } from '../../components/ui/Input'
+import { Textarea } from '../../components/ui/Textarea'
+import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
 
 export function MethodistCourseInfoPage() {
   const { id = '1' } = useParams()
+
+  const [title, setTitle] = useState('Русский язык')
+  const [price, setPrice] = useState('24165')
+  const [shortDesc, setShortDesc] = useState(
+    'Основной курс 3.0 — это комплексная система подготовки к ЕГЭ по русскому языку на максимум!'
+  )
+  const [fullDesc, setFullDesc] = useState(
+    'Подробная программа курса включает в себя все разделы языкознания: орфографию, пунктуацию, лексику, грамматику. Каждый модуль содержит теоретические материалы и практические задания.'
+  )
+  const [isPublished, setIsPublished] = useState(true)
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false)
+  const [showPublishConfirm, setShowPublishConfirm] = useState(false)
+
+  const handleSave = () => {
+    // TODO: сохранить через API
+  }
+
+  const handleCancel = () => {
+    setShowCancelConfirm(true)
+  }
+
+  const handlePublish = () => {
+    setIsPublished(true)
+    setShowPublishConfirm(false)
+    // TODO: отправить запрос на публикацию
+  }
 
   return (
     <div>
@@ -17,33 +46,81 @@ export function MethodistCourseInfoPage() {
 
       <Card>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Input label="Название курса" defaultValue="Русский язык" />
-          <Input label="Стоимость" defaultValue="24165" />
+          <Input
+            label="Название курса"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <Input
+            label="Стоимость"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
         </div>
         <div className="mt-4">
-          <label className="mb-1 block text-sm text-slate-500">Краткое описание</label>
-          <textarea
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          <Textarea
+            label="Краткое описание"
             rows={3}
-            defaultValue="Основной курс 3.0 — это комплексная система подготовки к ЕГЭ по русскому языку на максимум!"
+            value={shortDesc}
+            onChange={(e) => setShortDesc(e.target.value)}
           />
         </div>
         <div className="mt-4">
-          <label className="mb-1 block text-sm text-slate-500">Полное описание</label>
-          <textarea
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          <Textarea
+            label="Полное описание"
             rows={8}
-            defaultValue="Подробная программа курса включает в себя все разделы языкознания: орфографию, пунктуацию, лексику, грамматику. Каждый модуль содержит теоретические материалы и практические задания."
+            value={fullDesc}
+            onChange={(e) => setFullDesc(e.target.value)}
           />
         </div>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <Input label="Статус" defaultValue="Опубликован" />
+        <div className="mt-4">
+          <Text size="sm" className="mb-1 block font-medium text-slate-500">
+            Статус
+          </Text>
+          <div className="flex items-center gap-3">
+            {isPublished ? (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700">
+                <span className="h-2 w-2 rounded-full bg-green-500" />
+                Опубликован
+              </span>
+            ) : (
+              <>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-700">
+                  <span className="h-2 w-2 rounded-full bg-yellow-500" />
+                  Черновик
+                </span>
+                <Button variant="green" size="sm" onClick={() => setShowPublishConfirm(true)}>
+                  Опубликовать
+                </Button>
+              </>
+            )}
+          </div>
         </div>
         <div className="mt-6 flex justify-end gap-3">
-          <Button variant="secondary">Отмена</Button>
-          <Button variant="blue">Сохранить</Button>
+          <Button variant="secondary" onClick={handleCancel}>Отмена</Button>
+          <Button variant="blue" onClick={handleSave}>Сохранить</Button>
         </div>
       </Card>
+
+      <ConfirmDialog
+        isOpen={showCancelConfirm}
+        title="Подтверждение"
+        message="Все несохранённые изменения будут потеряны. Отменить?"
+        confirmLabel="Отменить изменения"
+        variant="default"
+        onConfirm={() => setShowCancelConfirm(false)}
+        onCancel={() => setShowCancelConfirm(false)}
+      />
+
+      <ConfirmDialog
+        isOpen={showPublishConfirm}
+        title="Публикация курса"
+        message="После публикации курс станет доступен ученикам. Продолжить?"
+        confirmLabel="Опубликовать"
+        variant="default"
+        onConfirm={handlePublish}
+        onCancel={() => setShowPublishConfirm(false)}
+      />
     </div>
   )
 }

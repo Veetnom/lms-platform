@@ -7,8 +7,10 @@ import { HomePage } from './pages/HomePage'
 import { MethodistCourseHomeworkPage } from './pages/methodist/MethodistCourseHomeworkPage'
 import { MethodistCourseInfoPage } from './pages/methodist/MethodistCourseInfoPage'
 import { MethodistCourseListPage } from './pages/methodist/MethodistCourseListPage'
+import { MethodistCourseModuleCreatePage } from './pages/methodist/MethodistCourseModuleCreatePage'
+import { MethodistCourseModuleEditPage } from './pages/methodist/MethodistCourseModuleEditPage'
+import { MethodistCourseModulesPage } from './pages/methodist/MethodistCourseModulesPage'
 import { MethodistCourseStatisticsPage } from './pages/methodist/MethodistCourseStatisticsPage'
-import { MethodistCourseStructurePage } from './pages/methodist/MethodistCourseStructurePage'
 import { MethodistCourseTeachersPage } from './pages/methodist/MethodistCourseTeachersPage'
 import { CartPage } from './pages/student/CartPage'
 import { CourseDetailPage } from './pages/student/CourseDetailPage'
@@ -19,7 +21,9 @@ import { OnlineTutorPage } from './pages/student/OnlineTutorPage'
 import { SchedulePage } from './pages/student/SchedulePage'
 import { StorePage } from './pages/student/StorePage'
 import { TaskPage } from './pages/student/TaskPage'
-import { CourseCheckingPage } from './pages/teacher/CourseCheckingPage'
+import { CourseCheckingListPage } from './pages/teacher/CourseCheckingListPage'
+import { CourseCheckingSubmissionsPage } from './pages/teacher/CourseCheckingSubmissionsPage'
+import { CourseCheckingGradingPage } from './pages/teacher/CourseCheckingGradingPage'
 import { TeacherGroupsPage } from './pages/teacher/TeacherGroupsPage'
 import { CourseHomeworkPage } from './pages/teacher/CourseHomeworkPage'
 import { CourseInfoPage } from './pages/teacher/CourseInfoPage'
@@ -30,11 +34,17 @@ import { CuratorCourseInfoPage } from './pages/curator/CuratorCourseInfoPage'
 import { CuratorCourseListPage } from './pages/curator/CuratorCourseListPage'
 import { CuratorCourseStatisticsPage } from './pages/curator/CuratorCourseStatisticsPage'
 import { CuratorCourseStructurePage } from './pages/curator/CuratorCourseStructurePage'
-import { TeacherCheckingPage } from './pages/teacher/TeacherCheckingPage'
+import { TeacherCheckingListPage } from './pages/teacher/TeacherCheckingListPage'
+import { TeacherCheckingSubmissionsPage } from './pages/teacher/TeacherCheckingSubmissionsPage'
+import { TeacherCheckingGradingPage } from './pages/teacher/TeacherCheckingGradingPage'
 import { TeacherCourseListPage } from './pages/teacher/TeacherCourseListPage'
 import { TeacherLessonViewPage } from './pages/teacher/TeacherLessonViewPage'
 import { EditorLayout } from './components/layout/EditorLayout'
+import { MethodistLessonEditPage } from './pages/methodist/MethodistLessonEditPage'
 import { MethodistLessonEditorPage } from './pages/methodist/MethodistLessonEditorPage'
+import { MethodistHomeworkCreatePage } from './pages/methodist/MethodistHomeworkCreatePage'
+import { MethodistHomeworkEditPage } from './pages/methodist/MethodistHomeworkEditPage'
+import { MethodistHomeworkEditorPage } from './pages/methodist/MethodistHomeworkEditorPage'
 
 export default function App() {
   return (
@@ -61,12 +71,12 @@ export default function App() {
           <Route path="/teacher/courses/:id/structure/:moduleId" element={<CourseStructurePage />} />
           <Route path="/teacher/courses/:id/homework" element={<CourseHomeworkPage />} />
           <Route path="/teacher/courses/:id/statistics" element={<CourseStatisticsPage />} />
-          <Route path="/teacher/courses/:id/checking" element={<CourseCheckingPage />} />
-          <Route path="/teacher/courses/:id/checking/:assignmentId" element={<CourseCheckingPage />} />
-          <Route path="/teacher/courses/:id/checking/:assignmentId/:submissionId" element={<CourseCheckingPage />} />
-          <Route path="/teacher/checking" element={<TeacherCheckingPage />} />
-          <Route path="/teacher/checking/:assignmentId" element={<TeacherCheckingPage />} />
-          <Route path="/teacher/checking/:assignmentId/:submissionId" element={<TeacherCheckingPage />} />
+          <Route path="/teacher/courses/:id/checking" element={<CourseCheckingListPage />} />
+          <Route path="/teacher/courses/:id/checking/:assignmentId" element={<CourseCheckingSubmissionsPage />} />
+          <Route path="/teacher/courses/:id/checking/:assignmentId/:submissionId" element={<CourseCheckingGradingPage />} />
+          <Route path="/teacher/checking" element={<TeacherCheckingListPage />} />
+          <Route path="/teacher/checking/:assignmentId" element={<TeacherCheckingSubmissionsPage />} />
+          <Route path="/teacher/checking/:assignmentId/:submissionId" element={<TeacherCheckingGradingPage />} />
           <Route path="/teacher/courses/:id/lessons/:lessonId/view" element={<TeacherLessonViewPage />} />
           <Route path="/teacher/groups" element={<TeacherGroupsPage />} />
         </Route>
@@ -74,15 +84,20 @@ export default function App() {
         <Route element={<MethodistLayout />}>
           <Route path="/methodist/courses" element={<MethodistCourseListPage />} />
           <Route path="/methodist/courses/:id" element={<MethodistCourseInfoPage />} />
-          <Route path="/methodist/courses/:id/structure" element={<MethodistCourseStructurePage />} />
-          <Route path="/methodist/courses/:id/structure/:moduleId" element={<MethodistCourseStructurePage />} />
+          <Route path="/methodist/courses/:id/structure" element={<MethodistCourseModulesPage />} />
+          <Route path="/methodist/courses/:id/structure/create" element={<MethodistCourseModuleCreatePage />} />
+          <Route path="/methodist/courses/:id/structure/:moduleId" element={<MethodistCourseModuleEditPage />} />
           <Route path="/methodist/courses/:id/homework" element={<MethodistCourseHomeworkPage />} />
+          <Route path="/methodist/courses/:id/homework/create" element={<MethodistHomeworkCreatePage />} />
+          <Route path="/methodist/courses/:id/homework/:homeworkId" element={<MethodistHomeworkEditPage />} />
+          <Route path="/methodist/courses/:id/homework/:homeworkId/editor" element={<MethodistHomeworkEditorPage />} />
           <Route path="/methodist/courses/:id/teachers" element={<MethodistCourseTeachersPage />} />
           <Route path="/methodist/courses/:id/statistics" element={<MethodistCourseStatisticsPage />} />
+          <Route path="/methodist/courses/:courseId/lessons/:lessonId/edit" element={<MethodistLessonEditPage />} />
         </Route>
 
         <Route element={<EditorLayout />}>
-          <Route path="/methodist/courses/:courseId/lessons/:lessonId/edit" element={<MethodistLessonEditorPage />} />
+          <Route path="/methodist/courses/:courseId/lessons/:lessonId/editor" element={<MethodistLessonEditorPage />} />
         </Route>
 
         <Route element={<CuratorLayout />}>

@@ -3,18 +3,11 @@ import { CourseTabs } from '../../components/course/CourseTabs'
 import { Card } from '../../components/ui/Card'
 import { Heading } from '../../components/ui/Typography'
 import { PageContainer } from '../../components/ui/PageContainer'
+import { curatorStatStudents } from '../../data/mockStudents'
+import { curatorTeachers } from '../../data/mockTeachers'
 
-const mockStudents = [
-  { id: '1', name: 'Александр', progress: 70, points: 490 },
-  { id: '2', name: 'Елена', progress: 85, points: 520 },
-  { id: '3', name: 'Дмитрий', progress: 60, points: 380 },
-  { id: '4', name: 'Анна', progress: 90, points: 590 },
-]
-
-const mockTeachers = [
-  { id: '1', name: 'Аля Виноградова', role: 'Преподаватель', email: 'alya@mail.ru' },
-  { id: '2', name: 'Иван Петров', role: 'Преподаватель', email: 'ivan@mail.ru' },
-]
+const mockStudents = curatorStatStudents
+const mockTeachers = curatorTeachers
 
 export function CuratorCourseStatisticsPage() {
   const { id = '1' } = useParams()

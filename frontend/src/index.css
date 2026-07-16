@@ -16,3 +16,105 @@
 body {
   @apply bg-bg-base font-sans text-primary antialiased;
 }
+
+/* ── Tiptap Editor ──────────────────────────────────────────────────────── */
+
+.tiptap-editor {
+  @apply min-h-[120px] outline-none;
+}
+
+.tiptap-editor .ProseMirror {
+  @apply outline-none;
+}
+
+.tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
+  @apply pointer-events-none float-left h-0 text-slate-400;
+  content: attr(data-placeholder);
+}
+
+/* Таблицы */
+.tiptap-editor table {
+  @apply w-full border-collapse overflow-hidden rounded-xl border border-slate-200;
+}
+
+.tiptap-editor th,
+.tiptap-editor td {
+  @apply min-w-[80px] border border-slate-200 px-3 py-2 text-left text-sm;
+}
+
+.tiptap-editor th {
+  @apply bg-slate-50 font-semibold text-slate-700;
+}
+
+.tiptap-editor td {
+  @apply text-slate-600;
+}
+
+.tiptap-editor .selectedCell {
+  @apply bg-blue-50;
+}
+
+/* Маркированные и нумерованные списки */
+.tiptap-editor ul {
+  @apply list-disc pl-5;
+}
+
+.tiptap-editor ol {
+  @apply list-decimal pl-5;
+}
+
+.tiptap-editor li {
+  @apply text-slate-600;
+}
+
+.tiptap-editor li p {
+  @apply m-0;
+}
+
+/* Чекбокс-списки (task list) */
+.tiptap-editor ul[data-type="taskList"] {
+  @apply list-none pl-0;
+}
+
+.tiptap-editor ul[data-type="taskList"] li {
+  @apply flex items-start gap-2;
+}
+
+.tiptap-editor ul[data-type="taskList"] li > label {
+  @apply mt-0.5 flex-shrink-0;
+}
+
+.tiptap-editor ul[data-type="taskList"] li > label input[type="checkbox"] {
+  @apply h-4 w-4 cursor-pointer rounded border-slate-300 text-blue-600;
+}
+
+.tiptap-editor ul[data-type="taskList"] li[data-checked="true"] > div > p {
+  @apply text-slate-400 line-through;
+}
+
+/* Цитаты */
+.tiptap-editor blockquote {
+  @apply border-l-4 border-slate-300 pl-4 italic text-slate-500;
+}
+
+/* Код-блок */
+.tiptap-editor pre {
+  @apply overflow-x-auto rounded-lg bg-slate-900 px-4 py-3 text-sm text-slate-100;
+}
+
+.tiptap-editor code {
+  @apply rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono text-pink-600;
+}
+
+.tiptap-editor pre code {
+  @apply bg-transparent p-0 text-slate-100;
+}
+
+/* Выравнивание */
+.tiptap-editor [style*="text-align: center"] {
+  @apply text-center;
+}
+
+.tiptap-editor [style*="text-align: right"] {
+  @apply text-right;
+}

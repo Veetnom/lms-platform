@@ -103,6 +103,7 @@ export interface TeacherHomework {
   title: string
   status: CourseStatus
   points: number
+  openDate: string
   deadline: string
 }
 

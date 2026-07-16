@@ -1,22 +1,45 @@
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { Card } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 import { Heading, Text } from '../../components/ui/Typography'
 import { UserCheck, GraduationCap } from 'lucide-react'
+import { methodistTeachers, methodistCurators, allTeachers, allCurators } from '../../data/mockTeachers'
+import { AddPersonModal } from '../../components/methodist/AddPersonModal'
 
-const mockTeachers = [
-  { id: '1', name: 'Аля Виноградова', email: 'alya@mail.ru', checkedAnswers: 42 },
-  { id: '2', name: 'Иван Петров', email: 'ivan@mail.ru', checkedAnswers: 28 },
-]
-
-const mockCurators = [
-  { id: '3', name: 'Мария Смирнова', email: 'maria@mail.ru' },
-  { id: '4', name: 'Анна Кураторова', email: 'anna@mail.ru' },
-]
+const mockTeachers = methodistTeachers
+const mockCurators = methodistCurators
 
 export function MethodistCourseTeachersPage() {
   const { id = '1' } = useParams()
+
+  const [teacherModalOpen, setTeacherModalOpen] = useState(false)
+  const [curatorModalOpen, setCuratorModalOpen] = useState(false)
+
+  // Выбранные преподаватели (id)
+  const [teacherIds, setTeacherIds] = useState<string[]>(
+    mockTeachers.map((t) => t.id)
+  )
+  // Выбранные кураторы (id)
+  const [curatorIds, setCuratorIds] = useState<string[]>(
+    mockCurators.map((c) => c.id)
+  )
+
+  const toggleTeacher = (id: string) => {
+    setTeacherIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    )
+  }
+
+  const toggleCurator = (id: string) => {
+    setCuratorIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    )
+  }
+
+  const currentTeachers = mockTeachers.filter((t) => teacherIds.includes(t.id))
+  const currentCurators = mockCurators.filter((c) => curatorIds.includes(c.id))
 
   return (
     <div>
@@ -40,10 +63,12 @@ export function MethodistCourseTeachersPage() {
             <GraduationCap className="h-5 w-5 text-blue-600" />
             <Text size="base" color="primary" className="text-sm font-semibold">Преподаватели</Text>
           </div>
-          <Button variant="blue" size="sm">Добавить преподавателя</Button>
+          <Button variant="blue" size="sm" onClick={() => setTeacherModalOpen(true)}>
+            Добавить преподавателя
+          </Button>
         </div>
         <div className="space-y-3">
-          {mockTeachers.map((person) => (
+          {currentTeachers.map((person) => (
             <Card key={person.id}>
               <div className="flex items-center gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-sm font-bold text-white">
@@ -61,6 +86,7 @@ export function MethodistCourseTeachersPage() {
                 <button
                   type="button"
                   className="shrink-0 text-sm text-red-500 hover:text-red-700 transition-colors"
+                  onClick={() => setTeacherIds((prev) => prev.filter((x) => x !== person.id))}
                 >
                   Удалить
                 </button>
@@ -77,10 +103,12 @@ export function MethodistCourseTeachersPage() {
             <UserCheck className="h-5 w-5 text-violet-600" />
             <Text size="base" color="primary" className="text-sm font-semibold">Кураторы</Text>
           </div>
-          <Button variant="purple" size="sm">Добавить куратора</Button>
+          <Button variant="purple" size="sm" onClick={() => setCuratorModalOpen(true)}>
+            Добавить куратора
+          </Button>
         </div>
         <div className="space-y-3">
-          {mockCurators.map((person) => (
+          {currentCurators.map((person) => (
             <Card key={person.id}>
               <div className="flex items-center gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-purple-600 text-sm font-bold text-white">
@@ -93,6 +121,7 @@ export function MethodistCourseTeachersPage() {
                 <button
                   type="button"
                   className="shrink-0 text-sm text-red-500 hover:text-red-700 transition-colors"
+                  onClick={() => setCuratorIds((prev) => prev.filter((x) => x !== person.id))}
                 >
                   Удалить
                 </button>
@@ -101,6 +130,30 @@ export function MethodistCourseTeachersPage() {
           ))}
         </div>
       </div>
+
+      {/* Модалка добавления преподавателей */}
+      {teacherModalOpen && (
+        <AddPersonModal
+          title="Добавить преподавателей"
+          people={allTeachers}
+          selectedIds={teacherIds}
+          onToggle={toggleTeacher}
+          onClose={() => setTeacherModalOpen(false)}
+          onSave={() => setTeacherModalOpen(false)}
+        />
+      )}
+
+      {/* Модалка добавления кураторов */}
+      {curatorModalOpen && (
+        <AddPersonModal
+          title="Добавить кураторов"
+          people={allCurators}
+          selectedIds={curatorIds}
+          onToggle={toggleCurator}
+          onClose={() => setCuratorModalOpen(false)}
+          onSave={() => setCuratorModalOpen(false)}
+        />
+      )}
     </div>
   )
 }

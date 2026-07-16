@@ -1,19 +1,47 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 import { Heading } from '../../components/ui/Typography'
-import { methodistCourses } from '../../data/mockCoursesData'
+import { CourseFormModal, type CourseFormData } from '../../components/methodist/CourseFormModal'
+import { methodistCourses as initialCourses } from '../../data/mockCoursesData'
+import { pluralize } from '../../lib/pluralize'
+import type { MethodistCourseInfo } from '../../data/mockCoursesData'
 
 export function MethodistCourseListPage() {
+  const [courses, setCourses] = useState<MethodistCourseInfo[]>(initialCourses)
+  const [showCreateModal, setShowCreateModal] = useState(false)
+
+  const handleCreate = (data: CourseFormData) => {
+    const newCourse: MethodistCourseInfo = {
+      id: `course-${Date.now()}`,
+      title: data.title,
+      studentCount: 0,
+      status: 'draft',
+      price: data.price,
+      shortDesc: data.shortDesc,
+      fullDesc: data.fullDesc,
+    }
+    setCourses((prev) => [...prev, newCourse])
+    setShowCreateModal(false)
+  }
+
   return (
     <div>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Heading as="h1">Курсы</Heading>
-        <Button>Создать курс</Button>
+        <Button onClick={() => setShowCreateModal(true)}>Создать курс</Button>
       </div>
 
+      {showCreateModal && (
+        <CourseFormModal
+          onClose={() => setShowCreateModal(false)}
+          onCreate={handleCreate}
+        />
+      )}
+
       <div className="grid gap-5 lg:grid-cols-2">
-        {methodistCourses.map((course) => {
+        {courses.map((course) => {
           const colorMap: Record<string, string> = {
             published: 'bg-green-100 text-green-700',
             draft: 'bg-yellow-100 text-yellow-700',
@@ -43,7 +71,7 @@ export function MethodistCourseListPage() {
                       </span>
                     </div>
                     <p className="mt-1 text-sm text-slate-500">
-                      {course.studentCount} {course.studentCount === 1 ? 'ученик' : 'учеников'}
+                      {course.studentCount} {pluralize(course.studentCount, ['ученик', 'ученика', 'учеников'])}
                     </p>
                   </div>
                 </div>

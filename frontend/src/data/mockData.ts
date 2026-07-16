@@ -254,9 +254,9 @@ export const teacherGroups: TeacherGroup[] = [
 ]
 
 export const teacherHomework: TeacherHomework[] = [
-  { id: '1', title: '4. Орфоэпия', status: 'published', points: 10, deadline: '17.12.2025' },
-  { id: '2', title: '12. Правописание Не и Ни', status: 'published', points: 10, deadline: '17.12.2025' },
-  { id: '3', title: '27. Сочинение', status: 'draft', points: 10, deadline: '17.12.2025' },
+  { id: '1', title: '4. Орфоэпия', status: 'published', points: 10, openDate: '01.12.2025', deadline: '17.12.2025' },
+  { id: '2', title: '12. Правописание Не и Ни', status: 'published', points: 10, openDate: '01.12.2025', deadline: '17.12.2025' },
+  { id: '3', title: '27. Сочинение', status: 'draft', points: 10, openDate: '01.12.2025', deadline: '17.12.2025' },
 ]
 
 export const teacherAssignments: TeacherAssignment[] = [

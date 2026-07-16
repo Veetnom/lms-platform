@@ -9,6 +9,9 @@ export interface MethodistCourseInfo {
   title: string
   studentCount: number
   status: 'published' | 'draft'
+  price?: string
+  shortDesc?: string
+  fullDesc?: string
 }
 
 export interface CourseModule {

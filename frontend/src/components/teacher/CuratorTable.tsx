@@ -1,4 +1,3 @@
-import { MoreHorizontal } from 'lucide-react'
 import type { Curator } from '../../types'
 import { Avatar } from '../ui/Avatar'
 
@@ -17,7 +16,6 @@ export function CuratorTable({ curators }: CuratorTableProps) {
             <th className="px-4 py-3 font-medium text-slate-600">Email</th>
             <th className="px-4 py-3 font-medium text-slate-600">Проверил работ</th>
             <th className="px-4 py-3 font-medium text-slate-600">Назначен преподавателем</th>
-            <th className="px-4 py-3" />
           </tr>
         </thead>
         <tbody>
@@ -33,15 +31,6 @@ export function CuratorTable({ curators }: CuratorTableProps) {
               <td className="px-4 py-3 text-slate-600">{curator.email}</td>
               <td className="px-4 py-3 text-slate-600">{curator.checkedAnswers}</td>
               <td className="px-4 py-3 text-slate-600">{curator.appointedAt}</td>
-              <td className="px-4 py-3">
-                <button
-                  type="button"
-                  className="rounded p-1 text-slate-400 hover:bg-slate-100"
-                  aria-label="Действия"
-                >
-                  <MoreHorizontal className="h-5 w-5" />
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>

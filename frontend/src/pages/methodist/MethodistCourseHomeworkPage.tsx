@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { CourseTabs } from '../../components/course/CourseTabs'
 import { HomeworkManageCard } from '../../components/teacher/HomeworkManageCard'
 import { Button } from '../../components/ui/Button'
@@ -7,9 +8,18 @@ import { Heading } from '../../components/ui/Typography'
 import { SearchInput } from '../../components/ui/SearchInput'
 import { Select } from '../../components/ui/Select'
 import { teacherHomework } from '../../data/mockData'
+import type { CourseStatus } from '../../types'
 
 export function MethodistCourseHomeworkPage() {
   const { id = '1' } = useParams()
+  const navigate = useNavigate()
+  const [homeworkList, setHomeworkList] = useState(teacherHomework)
+
+  const handleStatusChange = (hwId: string, status: CourseStatus) => {
+    setHomeworkList((prev) =>
+      prev.map((hw) => (hw.id === hwId ? { ...hw, status } : hw))
+    )
+  }
 
   return (
     <div>
@@ -32,13 +42,18 @@ export function MethodistCourseHomeworkPage() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          {teacherHomework.map((hw) => (
-            <HomeworkManageCard key={hw.id} homework={hw} />
+          {homeworkList.map((hw) => (
+            <HomeworkManageCard
+              key={hw.id}
+              homework={hw}
+              courseId={id}
+              onStatusChange={handleStatusChange}
+            />
           ))}
         </div>
 
         <div className="mt-6 flex justify-end">
-          <Button variant="purple">Добавить задание</Button>
+          <Button variant="purple" onClick={() => navigate(`/methodist/courses/${id}/homework/create`)}>Добавить задание</Button>
         </div>
       </Card>
     </div>
