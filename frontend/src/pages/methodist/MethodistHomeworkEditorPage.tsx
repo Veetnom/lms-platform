@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ArrowLeft, ChevronRight, Save } from 'lucide-react'
-import { StepEditor, type Step } from '../../components/methodist/StepEditor'
+import { StepEditor } from '../../components/methodist/StepEditor'
+import type { Step } from '../../types'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

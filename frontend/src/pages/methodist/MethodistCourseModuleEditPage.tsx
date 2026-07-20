@@ -9,13 +9,7 @@ import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
 import { ModuleForm } from '../../components/methodist/ModuleForm'
 import { courseModules } from '../../data/mockCoursesData'
 import { moduleLessons as initialLessons } from '../../data/mockData'
-import type { LessonItem } from '../../types'
-
-interface ModuleFormState {
-  title: string
-  startDate: string
-  requiredPoints: number
-}
+import type { LessonItem, ModuleFormState } from '../../types'
 
 export function MethodistCourseModuleEditPage() {
   const { id = '1', moduleId = '' } = useParams()

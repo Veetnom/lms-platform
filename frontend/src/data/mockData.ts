@@ -8,6 +8,7 @@ import type {
   HomeworkItem,
   HomeworkTabItem,
   LessonItem,
+  LessonTask,
   ScheduleEvent,
   Student,
   StudentModuleLesson,
@@ -16,6 +17,8 @@ import type {
   TeacherAssignment,
   TeacherGroup,
   TeacherHomework,
+  Step,
+  AnswerOption,
 } from '../types'
 
 export const storeCourses: Course[] = [
@@ -371,6 +374,112 @@ export const assignmentSubmissions: Record<string, AssignmentSubmission[]> = {
     { studentId: '4', submittedAt: '11.04.2026', status: 'checked', points: 9, maxPoints: 10 },
   ],
 }
+
+// ─── Хелперы для создания тестовых заданий уроков ────────────────────────────
+
+/** Создать пустой вариант ответа */
+export function makeOption(): AnswerOption {
+  return {
+    id: `opt-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    text: '',
+    isCorrect: false,
+  }
+}
+
+/** Создать шаг задания */
+export function makeStep(type: 'lecture' | 'assignment'): Step {
+  return {
+    id: 1,
+    title: 'Шаг 1',
+    content: '',
+    options: type === 'assignment' ? [makeOption(), makeOption()] : [],
+    points: type === 'assignment' ? 5 : 0,
+    answerType: 'single',
+  }
+}
+
+/** Перенумеровать ID шагов */
+export function renumberSteps(items: Step[]): Step[] {
+  return items.map((s, i) => ({ ...s, id: i + 1 }))
+}
+
+// ─── Моковые задания для редактора уроков ────────────────────────────────────
+
+export const mockLessonTasks: LessonTask[] = [
+  {
+    id: 8,
+    title: 'Введение в орфографию',
+    type: 'lecture',
+    steps: [
+      {
+        id: 1,
+        title: 'Шаг 1',
+        content: '<p>Орфография — раздел лингвистики, изучающий правильное написание слов.</p>',
+        options: [],
+        points: 0,
+        answerType: 'single',
+      },
+      {
+        id: 2,
+        title: 'Шаг 2',
+        content: '<p>Основные принципы русской орфографии:</p><ul><li>Морфологический</li><li>Фонетический</li><li>Традиционный</li></ul>',
+        options: [],
+        points: 0,
+        answerType: 'single',
+      },
+    ],
+  },
+  {
+    id: 9,
+    title: 'Задание №9',
+    type: 'assignment',
+    steps: [
+      {
+        id: 1,
+        title: 'Шаг 1',
+        content: '<p>Какое слово пишется с <strong>безударной</strong> гласной?</p>',
+        options: [
+          { id: 'opt-1', text: 'м...рской', isCorrect: false },
+          { id: 'opt-2', text: 'в...да', isCorrect: true },
+          { id: 'opt-3', text: 'м...рковь', isCorrect: false },
+          { id: 'opt-4', text: 'с...бака', isCorrect: false },
+        ],
+        points: 5,
+        answerType: 'single',
+      },
+      {
+        id: 2,
+        title: 'Шаг 2',
+        content: '<p>Выберите все слова с <em>непроверяемой</em> гласной:</p>',
+        options: [
+          { id: 'opt-5', text: 'с...бака', isCorrect: true },
+          { id: 'opt-6', text: 'м...рковь', isCorrect: true },
+          { id: 'opt-7', text: 'тр...ва', isCorrect: false },
+        ],
+        points: 10,
+        answerType: 'multiple',
+      },
+    ],
+  },
+  {
+    id: 10,
+    title: 'Задание №10',
+    type: 'assignment',
+    steps: [
+      {
+        id: 1,
+        title: 'Шаг 1',
+        content: '<p>Найдите ошибку в тексте:</p>',
+        options: [
+          { id: 'opt-8', text: 'Вариант А', isCorrect: false },
+          { id: 'opt-9', text: 'Вариант Б', isCorrect: true },
+        ],
+        points: 5,
+        answerType: 'single',
+      },
+    ],
+  },
+]
 
 export function formatPrice(price: number): string {
   return price.toLocaleString('ru-RU') + ' ₽'

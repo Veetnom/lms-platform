@@ -5,13 +5,8 @@ import { Card } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 import { Heading } from '../../components/ui/Typography'
 import { ModuleForm } from '../../components/methodist/ModuleForm'
+import type { ModuleFormState } from '../../types'
 import type { CourseModule } from '../../data/mockCoursesData'
-
-interface ModuleFormState {
-  title: string
-  startDate: string
-  requiredPoints: number
-}
 
 export function MethodistCourseModuleCreatePage() {
   const { id: courseId = '1' } = useParams()

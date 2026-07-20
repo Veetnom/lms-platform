@@ -9,99 +9,11 @@ import {
   Save,
 } from 'lucide-react'
 import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
-import { StepEditor, type Step } from '../../components/methodist/StepEditor'
-
-// ─── Types ───────────────────────────────────────────────────────────────────
+import { StepEditor } from '../../components/methodist/StepEditor'
+import type { Step, LessonTask } from '../../types'
+import { mockLessonTasks, makeOption, makeStep, renumberSteps } from '../../data/mockData'
 
 type TaskType = 'lecture' | 'assignment'
-
-interface LessonTask {
-  id: number
-  title: string
-  type: TaskType
-  steps: Step[]
-}
-
-// ─── Mock ─────────────────────────────────────────────────────────────────────
-
-const makeOption = (): Step['options'][number] => ({
-  id: `opt-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-  text: '',
-  isCorrect: false,
-})
-
-const makeStep = (type: TaskType): Step => ({
-  id: 1,
-  title: 'Шаг 1',
-  content: '',
-  options: type === 'assignment' ? [makeOption(), makeOption()] : [],
-  points: type === 'assignment' ? 5 : 0,
-  answerType: 'single',
-})
-
-const MOCK_TASKS: LessonTask[] = [
-  {
-    id: 8,
-    title: 'Введение в орфографию',
-    type: 'lecture',
-    steps: [
-      {
-        id: 1,
-        title: 'Шаг 1',
-        content: '<p>Орфография — раздел лингвистики, изучающий правильное написание слов.</p>',
-        options: [],
-        points: 0,
-        answerType: 'single',
-      },
-      {
-        id: 2,
-        title: 'Шаг 2',
-        content: '<p>Основные принципы русской орфографии:</p><ul><li>Морфологический</li><li>Фонетический</li><li>Традиционный</li></ul>',
-        options: [],
-        points: 0,
-        answerType: 'single',
-      },
-    ],
-  },
-  {
-    id: 9,
-    title: 'Задание №9',
-    type: 'assignment',
-    steps: [
-      {
-        id: 1,
-        title: 'Шаг 1',
-        content: '<p>Какое слово пишется с <strong>безударной</strong> гласной?</p>',
-        options: [makeOption(), makeOption(), makeOption(), makeOption()],
-        points: 5,
-        answerType: 'single',
-      },
-      {
-        id: 2,
-        title: 'Шаг 2',
-        content: '<p>Выберите все слова с <em>непроверяемой</em> гласной:</p>',
-        options: [makeOption(), makeOption(), makeOption()],
-        points: 10,
-        answerType: 'multiple',
-      },
-    ],
-  },
-  {
-    id: 10,
-    title: 'Задание №10',
-    type: 'assignment',
-    steps: [
-      {
-        id: 1,
-        title: 'Шаг 1',
-        content: '<p>Найдите ошибку в тексте:</p>',
-        options: [makeOption(), makeOption()],
-        points: 5,
-        answerType: 'single',
-      },
-    ],
-  },
-]
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
@@ -109,7 +21,7 @@ export function MethodistLessonEditorPage() {
   useParams()
   const navigate = useNavigate()
 
-  const [tasks, setTasks] = useState<LessonTask[]>(MOCK_TASKS)
+  const [tasks, setTasks] = useState<LessonTask[]>(mockLessonTasks)
   const [activeTaskId, setActiveTaskId] = useState<number>(9)
   const [lessonTitle, setLessonTitle] = useState('Урок 1. Орфография')
 
@@ -126,10 +38,6 @@ export function MethodistLessonEditorPage() {
   // Шаги активной задачи (локальное состояние для редактирования)
   const [steps, setSteps] = useState<Step[]>(() => activeTask.steps)
   const [activeStepId, setActiveStepId] = useState<number>(() => steps[0]?.id ?? 1)
-
-  // Перенумерация ID шагов
-  const renumberSteps = (items: Step[]): Step[] =>
-    items.map((s, i) => ({ ...s, id: i + 1 }))
 
   // ── Task helpers ──
 

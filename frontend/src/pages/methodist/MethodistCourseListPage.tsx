@@ -3,42 +3,21 @@ import { Link } from 'react-router-dom'
 import { Card } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 import { Heading } from '../../components/ui/Typography'
-import { CourseFormModal, type CourseFormData } from '../../components/methodist/CourseFormModal'
 import { methodistCourses as initialCourses } from '../../data/mockCoursesData'
 import { pluralize } from '../../lib/pluralize'
 import type { MethodistCourseInfo } from '../../data/mockCoursesData'
 
 export function MethodistCourseListPage() {
-  const [courses, setCourses] = useState<MethodistCourseInfo[]>(initialCourses)
-  const [showCreateModal, setShowCreateModal] = useState(false)
-
-  const handleCreate = (data: CourseFormData) => {
-    const newCourse: MethodistCourseInfo = {
-      id: `course-${Date.now()}`,
-      title: data.title,
-      studentCount: 0,
-      status: 'draft',
-      price: data.price,
-      shortDesc: data.shortDesc,
-      fullDesc: data.fullDesc,
-    }
-    setCourses((prev) => [...prev, newCourse])
-    setShowCreateModal(false)
-  }
+  const [courses] = useState<MethodistCourseInfo[]>(initialCourses)
 
   return (
     <div>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Heading as="h1">Курсы</Heading>
-        <Button onClick={() => setShowCreateModal(true)}>Создать курс</Button>
+        <Link to="/methodist/courses/create">
+          <Button>Создать курс</Button>
+        </Link>
       </div>
-
-      {showCreateModal && (
-        <CourseFormModal
-          onClose={() => setShowCreateModal(false)}
-          onCreate={handleCreate}
-        />
-      )}
 
       <div className="grid gap-5 lg:grid-cols-2">
         {courses.map((course) => {

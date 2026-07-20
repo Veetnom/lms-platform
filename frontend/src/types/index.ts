@@ -170,3 +170,38 @@ export interface AssignmentSubmission {
   points?: number
   maxPoints?: number
 }
+
+/** Тип задания в редакторе уроков */
+export type LessonTaskType = 'lecture' | 'assignment'
+
+/** Вариант ответа в шаге задания */
+export interface AnswerOption {
+  id: string
+  text: string
+  isCorrect: boolean
+}
+
+/** Шаг задания (лекция или задание) */
+export interface Step {
+  id: number
+  title: string
+  content: string
+  options: AnswerOption[]
+  points: number
+  answerType: 'single' | 'multiple' | 'text'
+}
+
+/** Задание в редакторе уроков */
+export interface LessonTask {
+  id: number
+  title: string
+  type: LessonTaskType
+  steps: Step[]
+}
+
+/** Состояние формы модуля (создание/редактирование) */
+export interface ModuleFormState {
+  title: string
+  startDate: string
+  requiredPoints: number
+}

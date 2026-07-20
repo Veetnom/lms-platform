@@ -39,23 +39,7 @@ import {
   Table as TableIcon,
 } from 'lucide-react'
 import { ConfirmDialog } from '../ui/ConfirmDialog'
-
-// ─── Types ───────────────────────────────────────────────────────────────────
-
-export interface AnswerOption {
-  id: string
-  text: string
-  isCorrect: boolean
-}
-
-export interface Step {
-  id: number
-  title: string
-  content: string
-  options: AnswerOption[]
-  points: number
-  answerType: 'single' | 'multiple' | 'text'
-}
+import type { Step, AnswerOption } from '../../types'
 
 export interface StepEditorProps {
   steps: Step[]

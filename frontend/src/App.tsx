@@ -6,6 +6,7 @@ import { TeacherLayout } from './components/layout/TeacherLayout'
 import { HomePage } from './pages/HomePage'
 import { MethodistCourseHomeworkPage } from './pages/methodist/MethodistCourseHomeworkPage'
 import { MethodistCourseInfoPage } from './pages/methodist/MethodistCourseInfoPage'
+import { MethodistCourseCreatePage } from './pages/methodist/MethodistCourseCreatePage'
 import { MethodistCourseListPage } from './pages/methodist/MethodistCourseListPage'
 import { MethodistCourseModuleCreatePage } from './pages/methodist/MethodistCourseModuleCreatePage'
 import { MethodistCourseModuleEditPage } from './pages/methodist/MethodistCourseModuleEditPage'
@@ -83,6 +84,7 @@ export default function App() {
 
         <Route element={<MethodistLayout />}>
           <Route path="/methodist/courses" element={<MethodistCourseListPage />} />
+          <Route path="/methodist/courses/create" element={<MethodistCourseCreatePage />} />
           <Route path="/methodist/courses/:id" element={<MethodistCourseInfoPage />} />
           <Route path="/methodist/courses/:id/structure" element={<MethodistCourseModulesPage />} />
           <Route path="/methodist/courses/:id/structure/create" element={<MethodistCourseModuleCreatePage />} />

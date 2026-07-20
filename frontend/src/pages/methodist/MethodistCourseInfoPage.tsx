@@ -7,19 +7,16 @@ import { Heading, Text } from '../../components/ui/Typography'
 import { Input } from '../../components/ui/Input'
 import { Textarea } from '../../components/ui/Textarea'
 import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
+import { mockCourseInfo } from '../../data/mockCoursesData'
 
 export function MethodistCourseInfoPage() {
   const { id = '1' } = useParams()
 
-  const [title, setTitle] = useState('Русский язык')
-  const [price, setPrice] = useState('24165')
-  const [shortDesc, setShortDesc] = useState(
-    'Основной курс 3.0 — это комплексная система подготовки к ЕГЭ по русскому языку на максимум!'
-  )
-  const [fullDesc, setFullDesc] = useState(
-    'Подробная программа курса включает в себя все разделы языкознания: орфографию, пунктуацию, лексику, грамматику. Каждый модуль содержит теоретические материалы и практические задания.'
-  )
-  const [isPublished, setIsPublished] = useState(true)
+  const [title, setTitle] = useState(mockCourseInfo.title)
+  const [price, setPrice] = useState(mockCourseInfo.price)
+  const [shortDesc, setShortDesc] = useState(mockCourseInfo.shortDesc)
+  const [fullDesc, setFullDesc] = useState(mockCourseInfo.fullDesc)
+  const [isPublished, setIsPublished] = useState(mockCourseInfo.isPublished)
   const [showCancelConfirm, setShowCancelConfirm] = useState(false)
   const [showPublishConfirm, setShowPublishConfirm] = useState(false)
 

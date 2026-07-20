@@ -38,6 +38,23 @@ export const courseModules: CourseModule[] = [
   { id: 'm4', title: 'Модуль 4. Сочинение', lessonCount: 4 },
 ]
 
+/** Данные для страницы информации о курсе (MethodistCourseInfoPage) */
+export interface CourseInfoData {
+  title: string
+  price: string
+  shortDesc: string
+  fullDesc: string
+  isPublished: boolean
+}
+
+export const mockCourseInfo: CourseInfoData = {
+  title: 'Русский язык',
+  price: '24165',
+  shortDesc: 'Основной курс 3.0 — это комплексная система подготовки к ЕГЭ по русскому языку на максимум!',
+  fullDesc: 'Подробная программа курса включает в себя все разделы языкознания: орфографию, пунктуацию, лексику, грамматику. Каждый модуль содержит теоретические материалы и практические задания.',
+  isPublished: true,
+}
+
 export const allStudents = [
   { id: '1', name: 'Александр', email: 'alex@mail.ru' },
   { id: '2', name: 'Елена', email: 'elena@mail.ru' },
